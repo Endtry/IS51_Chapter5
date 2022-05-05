@@ -1,5 +1,8 @@
 
 
+from cmath import inf
+
+
 translate = {
     "red": "rojo",
     "blue": "aloz",
@@ -73,29 +76,63 @@ user = {
 # user.clear()
 
 # print("Cleared user object: ", user)
-original_dict = {}
-dict1 = {
-    "a": "A",
-    "b": "B",
-    "c": "C"
-}
+# original_dict = {}
+# dict1 = {
+#     "a": "A",
+#     "b": "B",
+#     "c": "C"
+# }
 
-dict2 = {
-    "c": "C",
-    "d": "D",
-    "e": "E",
-}
+# dict2 = {
+#     "c": "C",
+#     "d": "D",
+#     "e": "E",
+# }
 
-# print("Merged Dictionary", original_dict.update(dict2)) # TODO: check python version
+# dict3 = {
+#     "f": "F",
+#     "g": "G",
+#     "h": "H",
+# }
+
+# dict1.update(dict2)
+# dict1.update(dict3)
+# print("dict1", dict1)
+
+# TODO: check python version
+# print("Merged Dictionary", original_dict.update(dict2))
+
+# def main():
+#     print("Main running...")
+#     d = {}
+#     print(d)
+#     d.update(dict2)
+#     print("d", d)
+#     print("Keys", d.keys())
+#     print("Values", d.values())
+
+# main()
+
 
 def main():
-    print("Main running...")
-    d = {}
-    print(d)
+    textese_dict = create_dictionary("Textese.txt")
+    prompt = "Enter a simple sentence in lowercase letters without any punctuation: "
+    sentence = input(prompt)
+    translate(sentence, textese_dict)
 
-    d.update(dict2)
-    print("d", d)
 
-    print("Keys", d.keys())
-    print("Values", d.values())
+def create_dictionary(file_name):
+    infile = open(file_name, "r")
+    text_list = [line.rstrip() for line in infile]
+    infile.close()
+    output = [x.split(",") for x in text_list]
+    return dict(output)
+
+
+def translate(sentence, textese_dict):
+    words = sentence.split()
+    for word in words:
+        print(textese_dict.get(word, word) + " ", end="")
+
+
 main()
